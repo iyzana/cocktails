@@ -14,6 +14,6 @@ public class IngredientController {
             Ingredient create = gson.fromJson(req.body(), Ingredient.class);
 
             return IngredientDao.save(create);
-        });
+        }, gson::toJson);
     }
 }

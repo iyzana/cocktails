@@ -13,7 +13,7 @@ public class App {
     public static Session session;
 
     public static void main(String[] args) {
-        SessionFactory sessions = new Configuration()
+        SessionFactory sessionFactory = new Configuration()
                 .setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect")
                 .setProperty("hibernate.connection.driver_class", "org.h2.Driver")
                 .setProperty("hibernate.connection.url", "jdbc:h2:./cocktails")
@@ -25,9 +25,8 @@ public class App {
                 .addAnnotatedClass(Ingredient.class)
                 .buildSessionFactory();
 
-        session = sessions.openSession();
+        session = sessionFactory.openSession();
 
-        System.out.println("hi");
         CocktailController.init();
         IngredientController.init();
     }
