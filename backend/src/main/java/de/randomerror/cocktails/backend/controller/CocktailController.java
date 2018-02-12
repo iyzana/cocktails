@@ -20,10 +20,10 @@ public class CocktailController {
     private static final Gson gson = new Gson();
     private static final double MAX_UNITS = 9 + Math.PI * 0.1;
 
-    public static void init() {
-        get("/cocktail", (req, res) -> CocktailDao.findAll(), gson::toJson);
+    public static void routes() {
+        get("", (req, res) -> CocktailDao.findAll(), gson::toJson);
 
-        post("/cocktail", (req, res) -> {
+        post("", (req, res) -> {
             CreateCocktailDto create = gson.fromJson(req.body(), CreateCocktailDto.class);
             Cocktail c = new Cocktail(create.getName(), buildInputs(create.getInputs()));
             return CocktailDao.save(c);

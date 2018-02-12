@@ -1,12 +1,14 @@
 package de.randomerror.cocktails.backend.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Cocktail {
     @Id
     @GeneratedValue
