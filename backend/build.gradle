@@ -7,6 +7,11 @@ mainClassName = 'App'
 
 dependencies {
     compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'org.hibernate:hibernate-core:5.2.13.Final'
+    compile 'org.projectlombok:lombok:1.16.20'
+    compile 'com.h2database:h2:1.4.196'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'org.slf4j:slf4j-simple:1.7.9'
 }
 
 repositories {
