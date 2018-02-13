@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'App'
+mainClassName = 'de.randomerror.cocktails.backend.App'
 
 dependencies {
     compile 'com.sparkjava:spark-core:2.7.1'
@@ -12,6 +12,7 @@ dependencies {
     compile 'com.h2database:h2:1.4.196'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'org.slf4j:slf4j-simple:1.7.9'
+    compile 'javax.xml.bind:jaxb-api:2.2.8'
 }
 
 repositories {

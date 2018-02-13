@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Optional;
 
 import static de.randomerror.cocktails.backend.dao.Hibernate.dbTransaction;
+import static java.util.Optional.ofNullable;
 
 public class CocktailDao {
     public static List<Cocktail> findAll() {
         return dbTransaction(session -> {
-            return session.createQuery("select c from Cocktail c", Cocktail.class).list();
+            return session.createQuery("from Cocktail", Cocktail.class).list();
         });
     }
 
     public static Optional<Cocktail> findById(long id) {
         return dbTransaction(session -> {
-            return Optional.ofNullable(session.find(Cocktail.class, id));
+            return ofNullable(session.find(Cocktail.class, id));
         });
     }
 
