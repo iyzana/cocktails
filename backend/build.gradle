@@ -7,14 +7,23 @@ plugins {
 mainClassName = 'de.randomerror.cocktails.backend.App'
 
 dependencies {
+    // web
     compile 'com.sparkjava:spark-core:2.7.1'
+
+    // db
     compile 'org.hibernate:hibernate-core:5.2.13.Final'
-    compile 'org.projectlombok:lombok:1.16.20'
     compile 'com.h2database:h2:1.4.196'
+
+    // helper
+    compile 'org.projectlombok:lombok:1.16.20'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'org.slf4j:slf4j-simple:1.7.9'
-    compile 'javax.xml.bind:jaxb-api:2.2.8'
     compile 'org.aeonbits.owner:owner:1.0.9'
+
+    // logging
+    compile 'org.slf4j:slf4j-simple:1.7.9'
+
+    // java 9
+    compile 'javax.xml.bind:jaxb-api:2.2.8'
 }
 
 repositories {
