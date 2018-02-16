@@ -9,12 +9,12 @@ import static spark.Spark.post;
 
 public class LoginController {
     private static final String PATH = "/login";
-    public static final String SESSION_ATTRIBUTE = "user";
+    private static final String SESSION_ATTRIBUTE = "user";
 
     public static void routes() {
         before((req, res) -> {
             // allow any login request
-            if (req.pathInfo().equals(PATH))
+            if (PATH.equals(req.pathInfo()) && "POST".equals(req.requestMethod()))
                 return;
 
             // deny all other unauthenticated requests
@@ -30,8 +30,8 @@ public class LoginController {
 
             req.session().attribute(SESSION_ATTRIBUTE, login.getName());
 
-            res.status(204);
-            return "";
-        });
+            res.status(200);
+            return "ok";
+        }, App.gson::toJson);
     }
 }
