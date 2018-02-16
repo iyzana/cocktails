@@ -1,7 +1,7 @@
 package de.randomerror.cocktails.backend.controller;
 
 
-import com.google.gson.Gson;
+import de.randomerror.cocktails.backend.App;
 import de.randomerror.cocktails.backend.dao.CocktailDao;
 import de.randomerror.cocktails.backend.dao.IngredientDao;
 import de.randomerror.cocktails.backend.dto.CreateCocktailDto;
@@ -17,17 +17,16 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class CocktailController {
-    private static final Gson gson = new Gson();
     private static final double MAX_UNITS = 9 + Math.PI * 0.1;
 
     public static void routes() {
-        get("", (req, res) -> CocktailDao.findAll(), gson::toJson);
+        get("", (req, res) -> CocktailDao.findAll(), App.gson::toJson);
 
         post("", (req, res) -> {
-            CreateCocktailDto create = gson.fromJson(req.body(), CreateCocktailDto.class);
+            CreateCocktailDto create = App.gson.fromJson(req.body(), CreateCocktailDto.class);
             Cocktail c = new Cocktail(create.getName(), buildInputs(create.getInputs()));
             return CocktailDao.save(c);
-        }, gson::toJson);
+        }, App.gson::toJson);
     }
 
     private static List<Input> buildInputs(Map<Long, Double> createInputs) {

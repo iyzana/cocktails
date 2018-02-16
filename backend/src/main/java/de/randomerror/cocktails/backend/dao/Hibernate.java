@@ -8,9 +8,9 @@ import java.util.function.Function;
 
 public class Hibernate {
     static <T> T dbTransaction(Function<Session, T> function) {
-        Transaction tx = App.session.beginTransaction();
+        Transaction tx = App.dbSession.beginTransaction();
         try {
-            T result = function.apply(App.session);
+            T result = function.apply(App.dbSession);
             tx.commit();
             return result;
         } catch (Exception e) {

@@ -13,6 +13,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'org.slf4j:slf4j-simple:1.7.9'
     compile 'javax.xml.bind:jaxb-api:2.2.8'
+    compile 'org.aeonbits.owner:owner:1.0.9'
 }
 
 repositories {
