@@ -8,6 +8,7 @@ import de.randomerror.cocktails.backend.dto.CreateCocktailDto;
 import de.randomerror.cocktails.backend.entity.Cocktail;
 import de.randomerror.cocktails.backend.entity.Ingredient;
 import de.randomerror.cocktails.backend.entity.Input;
+import de.randomerror.cocktails.backend.exception.InvalidInputException;
 import de.randomerror.cocktails.backend.exception.NotFoundException;
 
 import java.util.LinkedList;
@@ -52,18 +53,18 @@ public class CocktailController {
 
         for (Map.Entry<Long, Double> entry : createInputs.entrySet()) {
             Ingredient ingredient = IngredientDao.findById(entry.getKey())
-                    .orElseThrow(() -> new RuntimeException("ingredient does not exist"));
+                    .orElseThrow(() -> new NotFoundException("ingredient", entry.getKey()));
 
             double amount = entry.getValue();
             if (amount <= 0)
-                throw new RuntimeException("empty amount");
+                throw new InvalidInputException("empty amount");
             size += amount;
 
             inputs.add(new Input(ingredient, amount));
         }
 
         if (size > MAX_UNITS)
-            throw new RuntimeException("too many inputs");
+            throw new InvalidInputException("too many inputs");
 
         return inputs;
     }

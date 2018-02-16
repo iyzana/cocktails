@@ -6,6 +6,9 @@ plugins {
 
 mainClassName = 'de.randomerror.cocktails.backend.App'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
     // web
     compile 'com.sparkjava:spark-core:2.7.1'
