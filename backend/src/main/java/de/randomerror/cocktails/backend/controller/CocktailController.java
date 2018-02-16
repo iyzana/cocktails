@@ -8,13 +8,14 @@ import de.randomerror.cocktails.backend.dto.CreateCocktailDto;
 import de.randomerror.cocktails.backend.entity.Cocktail;
 import de.randomerror.cocktails.backend.entity.Ingredient;
 import de.randomerror.cocktails.backend.entity.Input;
+import de.randomerror.cocktails.backend.exception.NotFoundException;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static java.lang.Integer.parseInt;
+import static spark.Spark.*;
 
 public class CocktailController {
     private static final double MAX_UNITS = 9 + Math.PI * 0.1;
@@ -26,6 +27,22 @@ public class CocktailController {
             CreateCocktailDto create = App.gson.fromJson(req.body(), CreateCocktailDto.class);
             Cocktail c = new Cocktail(create.getName(), buildInputs(create.getInputs()));
             return CocktailDao.save(c);
+        }, App.gson::toJson);
+
+        get("/:id", (req, res) -> {
+            int id = parseInt(req.params("id"));
+            return CocktailDao.findById(id)
+                    .orElseThrow(() -> new NotFoundException("cocktail", id));
+        }, App.gson::toJson);
+
+        delete("/:id", (req, res) -> {
+            int id = parseInt(req.params("id"));
+            Cocktail cocktail = CocktailDao.findById(id)
+                    .orElseThrow(() -> new NotFoundException("cocktail", id));
+            CocktailDao.delete(cocktail);
+
+            res.status(204);
+            return null;
         }, App.gson::toJson);
     }
 

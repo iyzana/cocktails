@@ -10,6 +10,7 @@ import de.randomerror.cocktails.backend.entity.Cocktail;
 import de.randomerror.cocktails.backend.entity.Ingredient;
 import de.randomerror.cocktails.backend.entity.Input;
 import de.randomerror.cocktails.backend.exception.AuthenticationException;
+import de.randomerror.cocktails.backend.exception.NotFoundException;
 import org.aeonbits.owner.ConfigFactory;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
@@ -69,6 +70,18 @@ public class App {
             res.status(401);
             res.type("application/json");
             res.body(gson.toJson(new ErrorDto("unauthorized", ex.getMessage())));
+        });
+
+        exception(NotFoundException.class, (ex, req, res) -> {
+            res.status(404);
+            res.type("application/json");
+            res.body(gson.toJson(new ErrorDto("not found", ex.getMessage())));
+        });
+
+        exception(NumberFormatException.class, (ex, req, res) -> {
+            res.status(400);
+            res.type("application/json");
+            res.body(gson.toJson(new ErrorDto("bad request", "could not parse number " + ex.getMessage())));
         });
     }
 }
