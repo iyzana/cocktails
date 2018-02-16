@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id "com.github.johnrengelman.shadow" version "2.0.2"
 }
 
 mainClassName = 'de.randomerror.cocktails.backend.App'
