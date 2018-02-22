@@ -12,7 +12,7 @@ public class Input {
     @Id
     @GeneratedValue
     private long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Ingredient ingredient;
     private double amount;
 
