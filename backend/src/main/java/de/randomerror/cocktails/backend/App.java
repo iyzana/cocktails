@@ -34,9 +34,9 @@ public class App {
 
         errorHandlers();
 
-        LoginController.routes();
-        path("/cocktail", CocktailController::routes);
-        path("/ingredient", IngredientController::routes);
+        LoginController.registerRoutes();
+        CocktailController.registerRoutes();
+        IngredientController.registerRoutes();
     }
 
     private static Session configureDbSession() {

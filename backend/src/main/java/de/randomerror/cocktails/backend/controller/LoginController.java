@@ -8,13 +8,13 @@ import static spark.Spark.before;
 import static spark.Spark.post;
 
 public class LoginController {
-    private static final String PATH = "/login";
+    private static final String ROUTE = "/login";
     private static final String SESSION_ATTRIBUTE = "user";
 
-    public static void routes() {
+    public static void registerRoutes() {
         before((req, res) -> {
             // allow any login request
-            if (PATH.equals(req.pathInfo()) && "POST".equals(req.requestMethod()))
+            if (ROUTE.equals(req.pathInfo()) && "POST".equals(req.requestMethod()))
                 return;
 
             // deny all other unauthenticated requests
@@ -22,7 +22,7 @@ public class LoginController {
                 throw new AuthenticationException("not logged in");
         });
 
-        post(PATH, (req, res) -> {
+        post(ROUTE, (req, res) -> {
             LoginDto login = App.gson.fromJson(req.body(), LoginDto.class);
 
             if (!App.config.password().equals(login.getPassword()))

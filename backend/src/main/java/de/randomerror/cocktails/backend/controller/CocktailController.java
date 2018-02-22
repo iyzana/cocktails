@@ -20,23 +20,24 @@ import static spark.Spark.*;
 
 public class CocktailController {
     private static final double MAX_UNITS = 9 + Math.PI * 0.1;
+    private static final String ROUTE = "/cocktail";
 
-    public static void routes() {
-        get("", (req, res) -> CocktailDao.findAll(), App.gson::toJson);
+    public static void registerRoutes() {
+        get(ROUTE, (req, res) -> CocktailDao.findAll(), App.gson::toJson);
 
-        post("", (req, res) -> {
+        post(ROUTE, (req, res) -> {
             CreateCocktailDto create = App.gson.fromJson(req.body(), CreateCocktailDto.class);
             Cocktail c = new Cocktail(create.getName(), buildInputs(create.getInputs()));
             return CocktailDao.save(c);
         }, App.gson::toJson);
 
-        get("/:id", (req, res) -> {
+        get(ROUTE + "/:id", (req, res) -> {
             int id = parseInt(req.params("id"));
             return CocktailDao.findById(id)
                     .orElseThrow(() -> new NotFoundException("cocktail", id));
         }, App.gson::toJson);
 
-        delete("/:id", (req, res) -> {
+        delete(ROUTE + "/:id", (req, res) -> {
             int id = parseInt(req.params("id"));
             Cocktail cocktail = CocktailDao.findById(id)
                     .orElseThrow(() -> new NotFoundException("cocktail", id));

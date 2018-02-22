@@ -8,9 +8,11 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class IngredientController {
-    public static void routes() {
-        get("", (req, res) -> IngredientDao.findAll(), App.gson::toJson);
-        post("", (req, res) -> {
+    private static final String ROUTE = "/ingredient";
+
+    public static void registerRoutes() {
+        get(ROUTE, (req, res) -> IngredientDao.findAll(), App.gson::toJson);
+        post(ROUTE, (req, res) -> {
             Ingredient create = App.gson.fromJson(req.body(), Ingredient.class);
 
             return IngredientDao.save(create);
