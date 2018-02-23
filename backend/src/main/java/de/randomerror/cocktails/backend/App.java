@@ -5,10 +5,12 @@ import com.google.gson.GsonBuilder;
 import de.randomerror.cocktails.backend.controller.CocktailController;
 import de.randomerror.cocktails.backend.controller.IngredientController;
 import de.randomerror.cocktails.backend.controller.LoginController;
+import de.randomerror.cocktails.backend.controller.OrderController;
 import de.randomerror.cocktails.backend.dto.ErrorDto;
 import de.randomerror.cocktails.backend.entity.Cocktail;
 import de.randomerror.cocktails.backend.entity.Ingredient;
 import de.randomerror.cocktails.backend.entity.Input;
+import de.randomerror.cocktails.backend.entity.CocktailOrder;
 import de.randomerror.cocktails.backend.exception.AuthenticationException;
 import de.randomerror.cocktails.backend.exception.InvalidInputException;
 import de.randomerror.cocktails.backend.exception.NotFoundException;
@@ -37,6 +39,7 @@ public class App {
         LoginController.registerRoutes();
         CocktailController.registerRoutes();
         IngredientController.registerRoutes();
+        OrderController.registerRoutes();
     }
 
     private static Session configureDbSession() {
@@ -50,6 +53,7 @@ public class App {
                 .addAnnotatedClass(Cocktail.class)
                 .addAnnotatedClass(Input.class)
                 .addAnnotatedClass(Ingredient.class)
+                .addAnnotatedClass(CocktailOrder.class)
                 .buildSessionFactory()
                 .openSession();
     }

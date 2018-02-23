@@ -12,6 +12,7 @@ public class IngredientController {
 
     public static void registerRoutes() {
         get(ROUTE, (req, res) -> IngredientDao.findAll(), App.gson::toJson);
+
         post(ROUTE, (req, res) -> {
             Ingredient create = App.gson.fromJson(req.body(), Ingredient.class);
 
