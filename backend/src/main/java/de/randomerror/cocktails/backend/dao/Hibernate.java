@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 
 import java.util.function.Function;
 
-public class Hibernate {
+class Hibernate {
     static <T> T dbTransaction(Function<Session, T> function) {
         Transaction tx = App.dbSession.beginTransaction();
         try {

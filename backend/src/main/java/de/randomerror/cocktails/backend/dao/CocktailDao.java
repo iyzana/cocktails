@@ -10,15 +10,15 @@ import static java.util.Optional.ofNullable;
 
 public class CocktailDao {
     public static List<Cocktail> findAll() {
-        return dbTransaction(session -> {
-            return session.createQuery("from Cocktail", Cocktail.class).list();
-        });
+        return dbTransaction(session ->
+                session.createQuery("from Cocktail", Cocktail.class).list()
+        );
     }
 
     public static Optional<Cocktail> findById(long id) {
-        return dbTransaction(session -> {
-            return ofNullable(session.find(Cocktail.class, id));
-        });
+        return dbTransaction(session ->
+            ofNullable(session.find(Cocktail.class, id))
+        );
     }
 
     public static Cocktail save(Cocktail cocktail) {
