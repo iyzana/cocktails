@@ -31,6 +31,7 @@ public class OrderController {
             if (!order.getRequester().equals(LoginService.getUniqueName(req))) // check if allowed to delete the order
                 throw new NotFoundException("Order", id);
             OrderDao.delete(order);
+            MachineController.newOrder();
             res.status(204);
             return null;
         }, App.gson::toJson);

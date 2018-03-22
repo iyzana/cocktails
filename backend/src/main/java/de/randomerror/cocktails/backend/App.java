@@ -2,10 +2,7 @@ package de.randomerror.cocktails.backend;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import de.randomerror.cocktails.backend.controller.CocktailController;
-import de.randomerror.cocktails.backend.controller.IngredientController;
-import de.randomerror.cocktails.backend.controller.LoginController;
-import de.randomerror.cocktails.backend.controller.OrderController;
+import de.randomerror.cocktails.backend.controller.*;
 import de.randomerror.cocktails.backend.dto.ErrorDto;
 import de.randomerror.cocktails.backend.entity.Cocktail;
 import de.randomerror.cocktails.backend.entity.Ingredient;
@@ -29,6 +26,8 @@ public class App {
         dbSession = configureDbSession();
         gson = new GsonBuilder().setPrettyPrinting().create();
         config = ConfigFactory.create(AppConfig.class);
+
+        webSocket("/machine", MachineController.class);
 
         after("/*", (req, res) -> {
             res.type("application/json");
