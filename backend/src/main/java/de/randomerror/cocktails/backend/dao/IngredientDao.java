@@ -10,13 +10,13 @@ import static de.randomerror.cocktails.backend.dao.Hibernate.dbTransaction;
 public class IngredientDao {
     public static List<Ingredient> findAll() {
         return dbTransaction(session ->
-            session.createQuery("select i from Ingredient i", Ingredient.class).list()
+                session.createQuery("select i from Ingredient i", Ingredient.class).list()
         );
     }
 
     public static Optional<Ingredient> findById(long id) {
         return dbTransaction(session ->
-            Optional.ofNullable(session.find(Ingredient.class, id))
+                Optional.ofNullable(session.find(Ingredient.class, id))
         );
     }
 

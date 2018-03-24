@@ -26,7 +26,8 @@ public class OrderController {
         post(ROUTE, (req, res) -> {
             String requester = LoginService.getUniqueName(req);
             CreateOrderDto createOrder = App.gson.fromJson(req.body(), CreateOrderDto.class);
-            CocktailOrder order = new CocktailOrder(requester, createOrder.getName(), InputService.buildInputs(createOrder.getInputs()));
+            CocktailOrder order = new CocktailOrder(requester, createOrder.getName(),
+                    InputService.buildInputs(createOrder.getInputs()));
             return OrderDao.save(order);
         }, App.gson::toJson);
 

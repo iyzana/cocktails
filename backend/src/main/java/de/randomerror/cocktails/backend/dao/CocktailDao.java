@@ -17,7 +17,7 @@ public class CocktailDao {
 
     public static Optional<Cocktail> findById(long id) {
         return dbTransaction(session ->
-            ofNullable(session.find(Cocktail.class, id))
+                ofNullable(session.find(Cocktail.class, id))
         );
     }
 

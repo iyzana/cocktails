@@ -1,6 +1,5 @@
 package de.randomerror.cocktails.backend.controller;
 
-
 import de.randomerror.cocktails.backend.App;
 import de.randomerror.cocktails.backend.dao.CocktailDao;
 import de.randomerror.cocktails.backend.dto.CreateCocktailDto;
@@ -41,5 +40,4 @@ public class CocktailController {
             return null;
         }, App.gson::toJson);
     }
-
 }

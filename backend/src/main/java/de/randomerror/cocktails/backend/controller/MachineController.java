@@ -13,16 +13,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class MachineController {
     private static final Queue<Session> sessions = new ConcurrentLinkedQueue<>();
 
-    @OnWebSocketConnect
-    public void connect(Session session) {
-        sessions.add(session);
-    }
-
-    @OnWebSocketClose
-    public void closed(Session session, int statusCode, String reason) {
-        sessions.remove(session);
-    }
-
     public static void newOrder() throws IOException {
         send("new-order");
     }
@@ -31,5 +21,15 @@ public class MachineController {
         for (Session session : sessions) {
             session.getRemote().sendString(message);
         }
+    }
+
+    @OnWebSocketConnect
+    public void connect(Session session) {
+        sessions.add(session);
+    }
+
+    @OnWebSocketClose
+    public void closed(Session session, int statusCode, String reason) {
+        sessions.remove(session);
     }
 }
