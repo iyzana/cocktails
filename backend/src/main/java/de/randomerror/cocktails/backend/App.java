@@ -27,6 +27,8 @@ public class App {
         gson = new GsonBuilder().setPrettyPrinting().create();
         config = ConfigFactory.create(AppConfig.class);
 
+        System.out.println(config.adminPassword());
+
         webSocket("/machine", MachineController.class);
 
         after("/*", (req, res) -> {

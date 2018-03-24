@@ -25,10 +25,7 @@ public class LoginController {
         post(ROUTE, (req, res) -> {
             LoginDto login = App.gson.fromJson(req.body(), LoginDto.class);
 
-            if (!App.config.password().equals(login.getPassword()))
-                throw new AuthenticationException("wrong password");
-
-            LoginService.login(login.getName(), req);
+            LoginService.checkLogin(login.getName(), login.getPassword(), req);
 
             res.status(200);
             return "ok";

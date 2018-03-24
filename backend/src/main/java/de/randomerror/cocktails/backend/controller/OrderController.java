@@ -17,6 +17,12 @@ public class OrderController {
     public static void registerRoutes() {
         get(ROUTE, (req, res) -> OrderDao.findByRequester(LoginService.getUniqueName(req)), App.gson::toJson);
 
+        get(ROUTE + "/all", (req, res) -> {
+            LoginService.requireAdmin(req);
+
+            return OrderDao.findAll();
+        }, App.gson::toJson);
+
         post(ROUTE, (req, res) -> {
             String requester = LoginService.getUniqueName(req);
             CreateOrderDto createOrder = App.gson.fromJson(req.body(), CreateOrderDto.class);

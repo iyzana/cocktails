@@ -7,6 +7,7 @@ import de.randomerror.cocktails.backend.dto.CreateCocktailDto;
 import de.randomerror.cocktails.backend.entity.Cocktail;
 import de.randomerror.cocktails.backend.exception.NotFoundException;
 import de.randomerror.cocktails.backend.service.InputService;
+import de.randomerror.cocktails.backend.service.LoginService;
 
 import static java.lang.Integer.parseInt;
 import static spark.Spark.*;
@@ -30,6 +31,7 @@ public class CocktailController {
         }, App.gson::toJson);
 
         delete(ROUTE + "/:id", (req, res) -> {
+            LoginService.requireAdmin(req);
             int id = parseInt(req.params("id"));
             Cocktail cocktail = CocktailDao.findById(id)
                     .orElseThrow(() -> new NotFoundException("cocktail", id));
