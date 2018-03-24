@@ -10,7 +10,7 @@ import static de.randomerror.cocktails.backend.dao.Hibernate.dbTransaction;
 public class OrderDao {
     public static List<CocktailOrder> findAll() {
         return dbTransaction(session ->
-                session.createQuery("select c from Order c", CocktailOrder.class).list()
+                session.createQuery("select o from Order o", CocktailOrder.class).list()
         );
     }
 

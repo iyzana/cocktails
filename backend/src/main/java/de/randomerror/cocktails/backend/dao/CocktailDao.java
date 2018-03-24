@@ -11,7 +11,7 @@ import static java.util.Optional.ofNullable;
 public class CocktailDao {
     public static List<Cocktail> findAll() {
         return dbTransaction(session ->
-                session.createQuery("from Cocktail", Cocktail.class).list()
+                session.createQuery("select c from Cocktail c", Cocktail.class).list()
         );
     }
 
